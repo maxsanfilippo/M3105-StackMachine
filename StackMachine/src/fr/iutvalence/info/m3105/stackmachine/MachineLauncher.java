@@ -53,16 +53,11 @@ public class MachineLauncher
 		Stack expStack = null;
 		Stack callStack = null;
 
-		try
-		{
-			programMemory = new Memory(0x00000000, 0x00000020);
-			expStack = new Stack(16);
-			callStack = new Stack(16);
-		}
-		catch (InvalidParametersException e)
-		{
-			// Safely ignore this error, which is not one
-		}
+	
+		programMemory = new Memory(0x00000000, 0x00000020);
+		expStack = new Stack(16);
+		callStack = new Stack(16);
+		
 		
 		IO ioSystem = new IO(System.in, System.out, System.err);
 		CPU cpu = new CPU();		
