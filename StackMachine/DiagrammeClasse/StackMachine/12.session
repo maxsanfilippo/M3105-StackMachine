@@ -1,0 +1,12 @@
+window_sizes 1280 962 295 323 682 82
+diagrams
+  active  classdiagram_ref 128012 // StackMachineDiagram
+    979 804 100 4 0 0
+end
+show_stereotypes
+selected deploymentview_ref 128012 // StackMachine
+open
+  classview_ref 128012 // StackMachine
+  deploymentview_ref 128012 // StackMachine
+end
+end

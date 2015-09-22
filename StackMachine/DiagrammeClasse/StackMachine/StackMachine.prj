@@ -2,6 +2,7 @@ format 76
 "StackMachine"
   revision 1
   modified_by 12 ""
+  java_root_dir "G:/git/M3105-StackMachine/StackMachine/DiagrammeClasse/JavaBouml/"
 
 
   
@@ -54,6 +55,7 @@ format 76
     //activity diagram settings
     package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
     show_infonote default drawing_language default show_stereotype_properties default
+    associated_deployment_view deploymentview_ref 128012 // StackMachine
     classdiagram 128012 "StackMachineDiagram"
       draw_all_relations no hide_attributes no hide_operations no hide_getset_operations no show_members_full_definition yes show_members_visibility yes show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility yes show_infonote default shadow default show_stereotype_properties default
       size A4
@@ -555,6 +557,99 @@ ${members}}
 	
 	
 	
+      end
+    end
+  end
+
+  deploymentview 128012 "StackMachine"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 128012 "Machine"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_classes
+	class_ref 128012 // Machine
+      end
+    end
+
+    artifact 128140 "MachineLauncher"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_classes
+	class_ref 128140 // MachineLauncher
+      end
+    end
+
+    artifact 128268 "IO"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_classes
+	class_ref 128268 // IO
+      end
+    end
+
+    artifact 128396 "CPU"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_classes
+	class_ref 128396 // CPU
+      end
+    end
+
+    artifact 128524 "Instructions"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_classes
+	class_ref 128524 // Instructions
+      end
+    end
+
+    artifact 128652 "Memory"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_classes
+	class_ref 128652 // Memory
+      end
+    end
+
+    artifact 128780 "Stack"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_classes
+	class_ref 128780 // Stack
+      end
+    end
+
+    artifact 128908 "Program"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_classes
+	class_ref 128908 // Program
       end
     end
   end
