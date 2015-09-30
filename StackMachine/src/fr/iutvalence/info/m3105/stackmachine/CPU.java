@@ -29,8 +29,8 @@ public class CPU
 	public final static int POP		= 0x15;
 	
 	private IO ioSystem;
-	private int opCode;
-	private String programCounter;
+
+	private int programCounter;
 
 	// TODO something is missing here...
 
@@ -40,6 +40,7 @@ public class CPU
 		{
 			while (true)
 			{
+				int opCode = 0;
 				// TODO something is missing here...
 
 				System.err.print("@" + this.programCounter + ": ");

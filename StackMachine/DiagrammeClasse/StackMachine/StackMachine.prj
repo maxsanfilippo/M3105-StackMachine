@@ -156,8 +156,28 @@ ${members}}
 	relation_ref 129164 // <aggregation>
       end
 
-      classrelation 129932 // <association>
-	relation_ref 129292 // <association>
+      classrelation 136844 // <dependency>
+	relation 136076 -_->
+	  a default
+	    classrelation_ref 136844 // <dependency>
+	  b parent class_ref 135436 // ExpStack
+      end
+
+      operation 137868 "Machine"
+	public explicit_return_type ""
+	nparams 5
+	  param in name "cpu" type class_ref 128396 // CPU
+	  param in name "programMemory" type class_ref 128652 // Memory
+	  param in name "expStack" type class_ref 128780 // Stack
+	  param in name "callStack" type class_ref 128780 // Stack
+	  param in name "ioSystem" type class_ref 128268 // IO
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
       end
     end
 
@@ -184,16 +204,13 @@ ${members}}
 	    classrelation_ref 129676 // <aggregation>
       end
 
-      classrelation 129804 // <association>
-	relation 129292 ----
+      classrelation 129804 // <unidirectional association>
+	relation 129292 --->
 	  a role_name "" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 129804 // <association>
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 129932 // <association>
+	    classrelation_ref 129804 // <unidirectional association>
+	  b parent class_ref 128012 // Machine
       end
     end
 
@@ -209,7 +226,7 @@ ${members}}
       explicit_switch_type ""
       
       operation 128396 "read"
-	public explicit_return_type ""
+	public explicit_return_type "int"
 	nparams 0
 	
 	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
@@ -221,10 +238,11 @@ ${members}}
       end
 
       operation 128524 "write"
-	public explicit_return_type ""
-	nparams 0
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "op" explicit_type "int"
 	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
 "
 	
@@ -260,6 +278,46 @@ ${members}}
 	php_decl ""
 	python_decl ""
 	idl_decl ""
+      end
+
+      operation 136844 "displayRuntimeError"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "string" explicit_type "String"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 136972 "displayProgramTermination"
+	public explicit_return_type "void"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 137612 "Io"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "in" explicit_type "bufferedReader"
+	  param in name "out" explicit_type "PrintStream"
+	  param in name "err" explicit_type "PrintStream"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
       end
     end
 
@@ -372,7 +430,39 @@ ${members}}
 	
       end
 
-      attribute 128396 "opCode"
+      classrelation 136972 // <dependency>
+	relation 136204 -_->
+	  a default
+	    classrelation_ref 136972 // <dependency>
+	  b parent class_ref 128780 // Stack
+      end
+
+      classrelation 137100 // <dependency>
+	relation 136332 -_->
+	  a default
+	    classrelation_ref 137100 // <dependency>
+	  b parent class_ref 135436 // ExpStack
+      end
+
+      classrelation 137228 // CallStack_ExpStack (<unidirectional association>)
+	relation 136460 --->
+	  a role_name "CallStack_ExpStack" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137228 // CallStack_ExpStack (<unidirectional association>)
+	  b parent class_ref 128780 // Stack
+      end
+
+      classrelation 137356 // <unidirectional association>
+	relation 136588 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137356 // <unidirectional association>
+	  b parent class_ref 135436 // ExpStack
+      end
+
+      attribute 135564 "programCounter"
 	private explicit_type "int"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
@@ -455,6 +545,51 @@ ${members}}
 	
 	
       end
+
+      operation 136588 "getEndAddress"
+	public explicit_return_type "int"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 136716 "read"
+	public explicit_return_type "int"
+	nparams 1
+	  param in name "currentAddress" explicit_type "int"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      attribute 135308 "startAddress"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 135436 "endAddress"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
     end
 
     class 128780 "Stack"
@@ -476,6 +611,68 @@ ${members}}
 	php_decl ""
 	python_decl ""
 	idl_decl ""
+      end
+
+      operation 137100 "stack"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "address" explicit_type "int"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 137228 "unstack"
+	public explicit_return_type "void"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 137356 "read"
+	public explicit_return_type "int"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 137484 "getSize"
+	public explicit_return_type "int"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 137740 "Stack"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "size" explicit_type "int"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
       end
     end
 
@@ -499,11 +696,11 @@ ${members}}
 
       classrelation 129292 // <directional composition>
 	relation 129036 *-->
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+	  a role_name "" multiplicity "*" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
 	    classrelation_ref 129292 // <directional composition>
-	  b parent class_ref 128524 // Instruction
+	  b multiplicity "1" parent class_ref 128524 // Instruction
       end
 
       operation 129420 "getInstructionCount"
@@ -531,8 +728,33 @@ ${members}}
 	
       end
 
-      attribute 135052 "instructions"
-	private explicit_type "Instruction[]"
+      operation 137996 "Program"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "instructions" explicit_type "Instruction[]"
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 135436 "ExpStack"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      attribute 135180 "size"
+	private explicit_type "int"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "

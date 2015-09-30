@@ -8,5 +8,25 @@ public class Stack {
 	{
 		this.size=i;
 	}
+	
+	public void stack(int address)
+	{
+		
+	}
+	
+	public void unstack()
+	{
+		
+	}
+	
+	public int read()
+	{
+		return 0;
+	}
+
+	public int getSize(int size)
+	{
+		return this.size;
+	}
 
 }
