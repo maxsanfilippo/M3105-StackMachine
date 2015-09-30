@@ -1,6 +1,6 @@
 format 76
 "StackMachine"
-  revision 1
+  revision 2
   modified_by 12 ""
   java_root_dir "G:/git/M3105-StackMachine/StackMachine/DiagrammeClasse/JavaBouml/"
 
@@ -72,28 +72,22 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 128012 // cpu (<association>)
-	relation 128012 ----
+      classrelation 128012 // cpu (<unidirectional association>)
+	relation 128012 --->
 	  a role_name "cpu" multiplicity "1" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 128012 // cpu (<association>)
-	  b role_name "" multiplicity "1" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 128140 // <association>
+	    classrelation_ref 128012 // cpu (<unidirectional association>)
+	  b multiplicity "1" parent class_ref 128396 // CPU
       end
 
-      classrelation 128268 // programMemory (<association>)
-	relation 128140 ----
-	  a role_name "programMemory" multiplicity "n" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
-"
-	    classrelation_ref 128268 // programMemory (<association>)
-	  b role_name "" multiplicity "1" private
+      classrelation 128268 // programMemory (<unidirectional association>)
+	relation 128140 --->
+	  a role_name "programMemory" multiplicity "1" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 128396 // <association>
+	    classrelation_ref 128268 // programMemory (<unidirectional association>)
+	  b multiplicity "1" parent class_ref 128652 // Memory
       end
 
       operation 128140 "loadProgram"
@@ -238,10 +232,6 @@ ${members}}
 	
       end
 
-      classrelation 130188 // <association>
-	relation_ref 129420 // <association>
-      end
-
       attribute 128012 "in"
 	private explicit_type "BufferedReader"
 	cpp_decl ""
@@ -296,20 +286,13 @@ ${members}}
 	
       end
 
-      classrelation 128140 // <association>
-	relation_ref 128012 // <association>
-      end
-
-      classrelation 130060 // ioSystem (<association>)
-	relation 129420 ----
+      classrelation 130060 // ioSystem (<unidirectional association>)
+	relation 129420 --->
 	  a role_name "ioSystem" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 130060 // ioSystem (<association>)
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 130188 // <association>
+	    classrelation_ref 130060 // ioSystem (<unidirectional association>)
+	  b parent class_ref 128268 // IO
       end
 
       operation 128652 "wireToProgramMemory"
@@ -400,7 +383,7 @@ ${members}}
       end
     end
 
-    class 128524 "Instructions"
+    class 128524 "Instruction"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
@@ -411,10 +394,6 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 129420 // <association>
-	relation_ref 129036 // <association>
-      end
-
       operation 129676 "getOpCode"
 	public explicit_return_type "object"
 	nparams 0
@@ -451,10 +430,6 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 128396 // <association>
-	relation_ref 128140 // <association>
-      end
-
       operation 129932 "getStartAddress"
 	public explicit_return_type "int"
 	nparams 0
@@ -519,19 +494,16 @@ ${members}}
 	relation 128908 -_->
 	  a default
 	    classrelation_ref 129164 // <dependency>
-	  b parent class_ref 128524 // Instructions
+	  b parent class_ref 128524 // Instruction
       end
 
-      classrelation 129292 // <association>
-	relation 129036 ----
+      classrelation 129292 // <directional composition>
+	relation 129036 *-->
 	  a role_name "" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 129292 // <association>
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 129420 // <association>
+	    classrelation_ref 129292 // <directional composition>
+	  b parent class_ref 128524 // Instruction
       end
 
       operation 129420 "getInstructionCount"
@@ -547,7 +519,7 @@ ${members}}
       end
 
       operation 129548 "getInstructionAt"
-	public return_type class_ref 128524 // Instructions
+	public return_type class_ref 128524 // Instruction
 	nparams 1
 	  param in name "instructionNumber" explicit_type "int"
 	
@@ -557,6 +529,16 @@ ${members}}
 	
 	
 	
+      end
+
+      attribute 135052 "instructions"
+	private explicit_type "Instruction[]"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
       end
     end
   end
@@ -616,7 +598,7 @@ ${package}
 ${imports}
 ${definition}"
       associated_classes
-	class_ref 128524 // Instructions
+	class_ref 128524 // Instruction
       end
     end
 

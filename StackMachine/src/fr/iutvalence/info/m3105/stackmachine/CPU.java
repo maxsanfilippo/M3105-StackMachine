@@ -30,6 +30,7 @@ public class CPU
 	
 	private IO ioSystem;
 	private int opCode;
+	private String programCounter;
 
 	// TODO something is missing here...
 
@@ -41,12 +42,12 @@ public class CPU
 			{
 				// TODO something is missing here...
 
-				// System.err.print("@" + this.programCounter + ": ");
+				System.err.print("@" + this.programCounter + ": ");
 				switch (opCode)
 				{
 					case HALT:
 					{
-						// System.err.println("HALT");
+						System.err.println("HALT");
 						this.ioSystem.displayProgramTermination();
 						return;
 					}
