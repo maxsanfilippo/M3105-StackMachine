@@ -152,10 +152,6 @@ ${members}}
 	  b parent class_ref 128908 // Program
       end
 
-      classrelation 129676 // <aggregation>
-	relation_ref 129164 // <aggregation>
-      end
-
       classrelation 136844 // <dependency>
 	relation 136076 -_->
 	  a default
@@ -181,48 +177,24 @@ ${members}}
       end
     end
 
-    class 128140 "MachineLauncher"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      classrelation 129548 // <aggregation>
-	relation 129164 o---
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 129548 // <aggregation>
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 129676 // <aggregation>
-      end
-
-      classrelation 129804 // <unidirectional association>
-	relation 129292 --->
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 129804 // <unidirectional association>
-	  b parent class_ref 128012 // Machine
-      end
-    end
-
     class 128268 "IO"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+      visibility package stereotype "interface"
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
 ${members}}
 "
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
+      php_decl "${comment}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
       explicit_switch_type ""
       
       operation 128396 "read"
@@ -305,7 +277,7 @@ ${members}}
 	
       end
 
-      operation 137612 "Io"
+      operation 137612 "IO"
 	public explicit_return_type ""
 	nparams 3
 	  param in name "in" explicit_type "bufferedReader"
@@ -318,6 +290,22 @@ ${members}}
 	
 	
 	
+      end
+
+      classrelation 137868 // <composition>
+	relation_ref 136972 // <composition>
+      end
+
+      classrelation 137996 // <aggregation>
+	relation 137100 o---
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137996 // <aggregation>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 138124 // <aggregation>
       end
     end
 
@@ -471,6 +459,7 @@ ${members}}
 	python_decl ""
 	idl_decl ""
       end
+
     end
 
     class 128524 "Instruction"
@@ -589,6 +578,20 @@ ${members}}
 	php_decl ""
 	python_decl ""
 	idl_decl ""
+      end
+
+      operation 138252 "Memory"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "start" explicit_type "int"
+	  param in name "end" explicit_type "int"
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
       end
     end
 
@@ -763,6 +766,62 @@ ${members}}
 	idl_decl ""
       end
     end
+
+    class 135564 "MachineLauncher"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 137484 // <unidirectional association>
+	relation 136716 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137484 // <unidirectional association>
+	  b parent class_ref 128012 // Machine
+      end
+    end
+
+    class 135692 "IOConsole"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 137612 // <dependency>
+	relation 136844 -_->
+	  a default
+	    classrelation_ref 137612 // <dependency>
+	  b parent class_ref 128268 // IO
+      end
+
+      classrelation 137740 // <composition>
+	relation 136972 *---
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137740 // <composition>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137868 // <composition>
+      end
+
+      classrelation 138124 // <aggregation>
+	relation_ref 137100 // <aggregation>
+      end
+    end
   end
 
   deploymentview 128012 "StackMachine"
@@ -787,7 +846,6 @@ ${package}
 ${imports}
 ${definition}"
       associated_classes
-	class_ref 128140 // MachineLauncher
       end
     end
 

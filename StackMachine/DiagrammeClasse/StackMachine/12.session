@@ -1,12 +1,18 @@
 window_sizes 1280 962 295 323 682 82
 diagrams
   active  classdiagram_ref 128012 // StackMachineDiagram
-    979 804 100 4 0 0
+    979 804 100 4 144 0
 end
 show_stereotypes
-selected deploymentview_ref 128012 // StackMachine
 open
-  classview_ref 128012 // StackMachine
+  class_ref 128012 // Machine
+  class_ref 128268 // IO
+  class_ref 128396 // CPU
+  class_ref 128652 // Memory
+  class_ref 128780 // Stack
+  class_ref 128908 // Program
+  class_ref 135436 // ExpStack
+  class_ref 135564 // MachineLauncher
   deploymentview_ref 128012 // StackMachine
 end
 end
