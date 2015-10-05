@@ -57,22 +57,18 @@ public class CPU
 					}
 					case PUSH:
 					{
-						expStack.push(value);
 						break;
 					}
 					case ADD:
 					{
-						this.expStack.push(this.expStack.pop() + this.expStack.pop());
 						break;
 					}
 					case SUB:
 					{
-						// TODO something is missing here...
 						break;
 					}
 					case MUL:
 					{
-						// TODO something is missing here...
 						break;
 					}
 					case DIV:
@@ -157,7 +153,7 @@ public class CPU
 					}
 					case POP:
 					{
-						// TODO something is missing here...
+						ioSystem.write(this.expStack.pop());
 						break;
 					}
 					default:
@@ -210,13 +206,14 @@ public class CPU
 
 	public void clearStacks() 
 	{
-		// TODO Auto-generated method stub
+		this.callStack.clear();
+		this.expStack.clear();
 		
 	}
 
 	public void setPC(int address) 
 	{
-		// TODO Auto-generated method stub
+		this.programCounter = address;
 		
 	}
 

@@ -2,14 +2,14 @@ package fr.iutvalence.info.m3105.stackmachine;
 
 public class Stack {
 	
-	private int currentSize;
+	private int size;
 	private int maxSize;
 	private int[] instructions;
 
 	public Stack(int stackSize)
 	{
 		this.maxSize = stackSize;
- 		this.currentSize = 0;
+ 		this.size = 0;
 	}
 	
 	/**
@@ -19,10 +19,10 @@ public class Stack {
 	 */
 	public int pop() throws StackOverflowException
  	{
-		if (this.currentSize == this.maxSize)
+		if (this.size == this.maxSize)
 			throw new StackOverflowException();
 		
- 		this.currentSize--;
+ 		this.size--;
  		return this.instructions[this.instructions.length - 1];
  	}
 	
@@ -33,20 +33,20 @@ public class Stack {
 	 */
 	public void push(int value) throws StackUnderflowException
  	{
-		if (this.currentSize == 0)
+		if (this.size == 0)
 			throw new StackUnderflowException();
 		
- 		this.instructions[currentSize] = value;
- 		this.currentSize++;
+ 		this.instructions[size] = value;
+ 		this.size++;
  	}
 
 	public int getSize(int size)
 	{
-		return this.currentSize;
+		return this.size;
 	}
 	
 	public void clear()
 	{
-		this.currentSize = 0;
+		this.size = 0;
 	}
 }
