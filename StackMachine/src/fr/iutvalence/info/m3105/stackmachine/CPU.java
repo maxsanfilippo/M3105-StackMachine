@@ -31,6 +31,9 @@ public class CPU
 	private IO ioSystem;
 
 	private int programCounter;
+	private Stack callStack;
+	private Stack expStack;
+	private Memory memory;
 
 	// TODO something is missing here...
 
@@ -54,12 +57,12 @@ public class CPU
 					}
 					case PUSH:
 					{
-						// TODO something is missing here...
+						expStack.push(value);
 						break;
 					}
 					case ADD:
 					{
-						// TODO something is missing here...
+						this.expStack.push(this.expStack.pop() + this.expStack.pop());
 						break;
 					}
 					case SUB:
@@ -182,33 +185,37 @@ public class CPU
 			// TODO something is missing here...
 		}		
 	}
+	public void wireToProgramMemory(Memory programMemory) 
+	{
+		this.memory = programMemory;
+	}
 
-	public void wireToProgramMemory(Memory programMemory) {
+	public void wireToExpStack(Stack p_expStack) 
+	{
+		this.expStack = p_expStack;
+		
+	}
+
+	public void wireToCallStack(Stack p_callStack) 
+	{
+		this.callStack = p_callStack;
+		
+	}
+
+	public void wireToIoSubsystem(IO p_ioSystem) 
+	{
+		this.ioSystem = p_ioSystem;
+		
+	}
+
+	public void clearStacks() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void wireToExpStack(Stack expStack) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void wireToCallStack(Stack callStack) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void wireToIoSubsystem(IO ioSystem) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void clearStacks() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setPC(int address) {
+	public void setPC(int address) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
